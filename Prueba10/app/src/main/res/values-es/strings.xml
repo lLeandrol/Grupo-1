@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Sprint1</string>
+    <string name="txt_jugar">JUGAR</string>
+    <string name="txt_perfil">PERFIL</string>
+    <string name="txt_ajustes">CONFIGURACION</string>
+    <string name="txt_acerca_de">ACERCA DE</string>
+    <string name="txt_click_jugar">He oprimido el boton jugar</string>
+    <string name="txt_click_perfil">He oprimido el boton perfil</string>
+    <string name="txt_click_ajustes">He oprimido el boton ajustes</string>
+    <string name="txt_click_acerca_de">He oprimido el boton acerca de</string>
+    <string name="txt_contrasena">Contraseña</string>
+    <string name="txt_usuario">Usuario</string>
+    <string name="txt_iniciar_sesion">Iniciar sesión</string>
+    <string name="txt_registro">Registro</string>
+
+
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="content_terms">A través de la Ley 1581 de 2012 y el Decreto 1377 de 2013, se establece que todos los usuarios de alguna aplicacion en el ciber espacio tienen la oportunidad de conocer, suprimir, actualizar y rectificar todo tipo de datos personales recolectados,        almacenados o que hayan sido objeto de tratamiento en bases de datos en las entidades del público y privadas.</string>
+    <string name="our">Terminos</string>
+    <string name="returned">Regresar al resgistro</string>
+    <string name="hello_blank_fragment">Hola, aquí si mostrartan los productos que desees agregar</string>
+</resources>

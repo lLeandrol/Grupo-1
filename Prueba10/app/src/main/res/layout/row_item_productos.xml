@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:padding="10dp"
+    android:background="@drawable/borde_redondeado">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="50">
+
+        <ImageView
+            android:id="@+id/imv_item_imagen"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:src="@drawable/halo">
+
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tev_item_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:id="@+id/tev_item_categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categoria"
+            android:textSize="20dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tev_item_precio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio"
+            android:textSize="20dp">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/btn_item_favorito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favorito">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btn_item_carrito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carrito">
+
+        </Button>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

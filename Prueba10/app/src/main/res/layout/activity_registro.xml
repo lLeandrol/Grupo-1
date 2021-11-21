@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistroActivity"
+    android:orientation="vertical"
+    android:background="@color/color3"
+    android:layout_margin="30dp">
+
+    <EditText
+        android:id="@+id/edt_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft = "10dp"
+        android:layout_marginRight = "10dp"
+        android:layout_marginTop = "10dp"
+        android:layout_marginBottom = "10dp"
+        android:hint="Name"
+        android:textColorHint="@color/white">
+
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/edt_apellido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:textColorHint="@color/white"
+        android:layout_marginLeft = "10dp"
+        android:layout_marginRight = "10dp"
+        android:layout_marginTop = "10dp"
+        android:layout_marginBottom = "10dp"
+        android:paddingTop="10dp">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/edt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:hint="Email"
+        android:textColorHint="@color/white"
+        android:layout_marginLeft = "10dp"
+        android:layout_marginRight = "10dp"
+        android:layout_marginTop = "10dp"
+        android:layout_marginBottom = "10dp"
+        android:inputType="textEmailAddress">
+
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/edt_contrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textColorHint="@color/white"
+        android:inputType="textPassword"
+        android:layout_marginLeft = "10dp"
+        android:layout_marginRight = "10dp"
+        android:layout_marginTop = "10dp"
+        android:layout_marginBottom = "10dp"
+        android:paddingBottom="10dp">
+
+    </EditText>
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="Terms and Conditions"
+        android:textColor="@color/white"
+        android:layout_marginLeft = "10dp"
+        android:layout_marginRight = "10dp"
+        android:layout_marginTop = "10dp"
+        android:layout_marginBottom = "10dp"
+        android:id="@+id/chx_terminos"
+        >
+
+    </CheckBox>
+
+    <Button
+        android:id="@+id/btn_terminos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft = "10dp"
+        android:layout_marginRight = "10dp"
+        android:layout_marginTop = "10dp"
+        android:layout_marginBottom = "10dp"
+        android:textColorHint="@color/white"
+        android:text="@string/our"
+
+
+        >
+
+
+    </Button>
+
+    <Button
+        android:id="@+id/btn_registro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft = "10dp"
+        android:layout_marginRight = "10dp"
+        android:layout_marginTop = "10dp"
+        android:layout_marginBottom = "10dp"
+        android:textColorHint="@color/white"
+        android:text="Register">
+
+    </Button>
+
+</LinearLayout>

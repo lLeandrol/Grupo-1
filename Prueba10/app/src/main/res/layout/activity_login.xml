@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:background="@color/color3"
+    android:layout_marginTop="30dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginBottom="20dp">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/market"
+        android:layout_weight="40">
+    </ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/txt_usuario"
+        android:textSize="20dp"
+        android:layout_marginLeft="3dp"
+        android:layout_weight="5">
+    </TextView>
+
+    <EditText
+        android:id="@+id/edt_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:padding="6dp"
+        android:background="@drawable/borde_redondeado"
+        android:hint="user@gmail.com"
+        >
+
+    </EditText>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/txt_contrasena"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="3dp"
+        android:layout_weight="5">
+    </TextView>
+
+    <EditText
+        android:id="@+id/edt_contrasena"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:padding="6dp"
+        android:inputType="textPassword"
+        android:background="@drawable/borde_redondeado"
+        android:hint="Your Password"
+        >
+    </EditText>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/txt_iniciar_sesion"
+        android:layout_marginTop="20dp"
+        android:layout_weight="7"
+        android:id="@+id/btn_login">
+    </Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:text="@string/txt_registro"
+        android:id="@+id/btn_registro">
+
+    </Button>
+
+</LinearLayout>
