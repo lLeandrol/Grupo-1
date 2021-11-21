@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/borde_redondeado"
+    >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:src="@drawable/tienda_virtual_1"
+            android:id="@+id/imv_item_imagen"
+
+            >
+
+        </ImageView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="60"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:id="@+id/tev_item_nombre"
+            android:text="Nombre"
+            android:textSize="30dp"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:id="@+id/tev_item_categoria"
+            android:text="Categoria"
+            android:textSize="30dp"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:id="@+id/tev_item_precio"
+            android:text="Precio"
+            android:textSize="30dp"
+            >
+
+        </TextView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:text="Favoritos"
+            android:textSize="20dp"
+            android:id="@+id/btn_item_favorito"
+            android:background="@drawable/borde_redondeado">
+
+        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:text="Carrito"
+            android:textSize="20dp"
+            android:id="@+id/btn_item_carrito"
+            android:background="@drawable/borde_redondeado">
+
+        </Button>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

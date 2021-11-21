@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Tienda Online</string>
+    <string name="txt_play">JUGAR</string>
+    <string name="txt_profile">PERFIL</string>
+    <string name="txt_config">CONFIGURACION</string>
+    <string name="txt_about">ACERCA DE</string>
+    <string name="txt_clickjugar">Se oprime boton jugar</string>
+    <string name="txt_clickconfig">Se oprime boton Configuración</string>
+    <string name="txt_clickabout">Se oprime boton Acerca de</string>
+    <string name="txt_clickprofile">Se oprime boton perfil</string>
+    <string name="txt_user">Usuario</string>
+    <string name="txt_password">Contraseña</string>
+    <string name="txt_singup">Registrarse</string>
+    <string name="txt_name">Nombre</string>
+    <string name="txt_lastname">Apellido</string>
+    <string name="txt_email">Correo Electrónico</string>
+    <string name="txt_star">Iniciar Sesión</string>
+    <string name="txt_password_invalid">Contraseña Invalida</string>
+    <string name="txt_password_acepted">Contraseña Aceptada</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="navigation_drawer_open">Abrir cajón de navegación</string>
+    <string name="navigation_drawer_close">Cerrar cajón de navegación</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Banner inicio</string>
+    <string name="action_settings">Ajustes</string>
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_gallery">Galeria</string>
+    <string name="menu_slideshow">Diapositivas</string>
+    <string-array name="Categorias">
+        <item>jean dama</item>
+        <item>jean caballero</item>
+        <item>blusas</item>
+        <item>camisetas</item>
+        <item>camisa dama</item>
+        <item>camisa caballero</item>
+
+    </string-array>
+
+</resources>
