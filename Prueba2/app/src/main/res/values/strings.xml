@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">TechShop</string>
+    <string name="welcome">Welcome</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="lastname">LastName</string>
+    <string name="email">Email</string>
+    <string name="terms"><u>Terms and conditions and cookie policy</u></string>
+    <string name="signup">Sign up</string>
+    <string name="msg_signup">It\'s quick and easy</string>
+    <string name="forgot"><u>Forgotten password?</u></string>
+    <string name="rp_password">Repeat your password</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="lastdate_terms">Last modification</string>
+    <string name="title_terms">Terms and conditions of use of the site</string>
+    <string name="par_terms">This contract describes the general terms and conditions (the "General Terms and Conditions") applicable to the use of the services offered by TechStore. ("the Services") . Any person who wishes to access and / or use the site or services may do so subject to the General Terms and Conditions, along with all other policies and principles that govern TechStore and which are incorporated herein by reference.
+
+ANY PERSON WHO DOES NOT ACCEPT THESE GENERAL TERMS AND CONDITIONS, WHICH ARE MANDATORY AND BINDING, MUST REFRAIN FROM USING THE SITE AND / OR THE SERVICES.
+
+The User must read, understand and accept all the conditions established in the General Terms and Conditions and in the Privacy Policies, as well as in the other documents incorporated therein by reference, prior to their registration as a Mercado Libre User.</string>
+    <string name="cap_terms">1 - Capacity</string>
+    <string name="par2_terms">The Services are only available to people who have the legal capacity to contract. People who do not have that capacity, minors or TechShop Users who have been temporarily suspended or permanently disabled may not use the services. If you are registering a User as a Company, you must have the capacity to contract on behalf of such entity and to bind it under the terms of this Agreement.</string>
+    <string name="reg_terms">2 - Registration</string>
+    <string name="par3_terms">It is mandatory to complete the registration form in all its fields with valid data in order to use the services provided by TechShop. The future User must complete it with their personal information in an exact, precise and true way ("Personal Data") and assumes the commitment to update the Personal Data as necessary. Mercado Libre may use various means to identify its Users, but Mercado Libre is NOT responsible for the accuracy of the Personal Data provided by its Users. Users guarantee and respond, in any case, to the veracity, accuracy, validity and authenticity of the Personal Data entered.
+
+At its sole discretion, TechShop may require additional registration from Users who operate as concessionaires or real estate, as a requirement for said Users to access special packages of publications. In these cases, once the additional registration has been made, the offers for the sale of cars or real estate made by the concessionaires or real estate companies, respectively, will only be published in TechShop through any of said packages or under the modalities that TechShop enables for this type Users.
+
+TechShop reserves the right to request any additional proof and / or data in order to corroborate the Personal Data, as well as to temporarily or permanently suspend those Users whose data could not be confirmed. In these cases of disqualification, all published articles will be removed, as well as the offers made, without generating any right to compensation.
+
+The User will access his personal account ("Account") by entering his Pseudonym and chosen personal security key ("Security Key"). The User undertakes to maintain the confidentiality of his Security Code.
+
+The Account is personal, unique and non-transferable, and the same User is prohibited from registering or owning more than one Account. In the event that TechShop detects different Accounts that contain matching or related data, it may cancel, suspend or disable them.
+
+The User will be responsible for all the operations carried out in his Account, since access to it is restricted to the entry and use of his Security Code, which is exclusively known to the User. The User agrees to notify TechShop immediately and by suitable and reliable means, of any unauthorized use of their Account, as well as access by unauthorized third parties to it. It is clarified that the sale, assignment or transfer of the Account (including reputation and ratings) is prohibited under any title.
+
+TechShop reserves the right to reject any application for registration or to cancel a previously accepted registration, without being obliged to communicate or state the reasons for its decision and without generating any right to compensation or compensation.
+
+The User may not register if he, or his subsidiaries, affiliates, directors, officers, employees or agents is (are) a natural or legal person ("person") owned or controlled by persons who are (i) Subject a Sanctions or (ii) Located in, constituted in, or residents of a country or territory that is Subject to Sanctions, or whose Government is subject to Sanctions, including without limitation: the Crimea Region, Cuba, Iran, Syria and Korea of ​​the North. For the purposes of the above, Sanctions will be understood as: restrictions or prohibitions on the ability to participate in business and other economic activities with certain countries, regions, people, entities and industrial sectors or any government measure designed to deprive a target entity (including individuals, corporations, territories, countries, etc.) of financial and economic assets in order to counteract and attempt to reduce behavior that threatens national or international security or contravenes international law. In particular, those who are included in the Sanctioned Lists of OFAC (Office of Foreign Assets Control of the United States), Lists of terrorists of the United Nations (UN), List of foreign terrorist organizations of the United States, will be rejected as users or suspended or disabled. United States Department of State, and European Union Lists of organizations and individuals cataloged as terrorists, as well as on any national list</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>
