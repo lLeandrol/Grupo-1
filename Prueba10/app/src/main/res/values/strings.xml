@@ -19,7 +19,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <string name="txt_olvidaste">Forgot your password?</string>
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -30,8 +30,9 @@
         <item>Celulares</item>
         <item>Gaming</item>
     </string-array>
-
-    <string name="terms" translatable="false">Terms and Conditions</string>
+    <string name="select">Select Image</string>
+    <string name="upload">Upload Image</string>
+    <string name="terms">Terms and Conditions</string>
     <string name="content_terms">Through Law 1581 of 2012 and Decree 1377 of 2013, it is established that all users of any application in cyberspace have the opportunity to know, delete, update and rectify all types of personal data collected, stored or that have been subject to treatment in databases in public and private entities.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

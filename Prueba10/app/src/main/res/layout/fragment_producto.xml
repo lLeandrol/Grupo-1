@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductoFragment">
+    tools:context=".ProductoFragment"
+    android:orientation="vertical"
+    android:padding="30dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edt_producto_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edt_producto_categoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Categoría"></EditText>
+
+            <EditText
+                android:id="@+id/edt_producto_precio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Precio"
+                android:inputType="number">
+            </EditText>
+
+            <CheckBox
+                android:id="@+id/chb_producto_stock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¿Esta disponible?">
+
+            </CheckBox>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+                <Button
+                    android:id="@+id/btn_sel_imagen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Seleccionar imagen"
+                    android:layout_weight="50">
+
+                </Button>
+
+                <Button
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/btn_subir_imagen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cargar imagen"
+                    android:layout_weight="50">
+
+                </Button>
+
+            </LinearLayout>
+            <!-- TODO: Update blank fragment layout -->
+
+
+            <ImageView
+                android:id="@+id/imv_imagen"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/default_image">
+
+            </ImageView>
+
+            <Button
+                android:id="@+id/btn_producto_guardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Guardar producto">
+
+            </Button>
+
+
+        </LinearLayout>
+
+
+
+
+    </ScrollView>
+
+
+
+</LinearLayout>

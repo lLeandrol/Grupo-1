@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.prueba10">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,21 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Grupo11">
         <activity
-            android:name="com.example.prueba10.MenuActivity"
+            android:name=".ForgotPassword"
+            android:exported="false" />
+        <activity
+            android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/Theme.Grupo11.NoActionBar"></activity>
-        <activity android:name="com.example.prueba10.RegistroActivity" />
-        <activity android:name="com.example.prueba10.HomeActivity" />
-        <activity android:name="com.example.prueba10.TerminosActivity" />
-        <activity android:name="com.example.prueba10.LoginActivity" android:theme="@style/Theme.Grupo11.NoActionBar"
-            android:exported="true">
+            android:theme="@style/Theme.Grupo11.NoActionBar" />
+        <activity android:name=".RegistroActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".TerminosActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Grupo11.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.prueba10.MainActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -29,4 +29,8 @@
     <string name="our">Terminos</string>
     <string name="returned">Regresar al resgistro</string>
     <string name="hello_blank_fragment">Hola, aquí si mostrartan los productos que desees agregar</string>
+    <string name="txt_olvidaste">Olvidaste tu contraseña?</string>
+    <string name="select">Seleccionar Imagen</string>
+    <string name="terms">Terminos y Condiciones</string>
+    <string name="upload">Subir Imagen</string>
 </resources>

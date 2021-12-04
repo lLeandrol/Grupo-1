@@ -1,5 +1,6 @@
 package com.example.prueba10;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,13 @@ import com.example.prueba10.database.UserDatabase;
 import com.example.prueba10.database.model.User;
 import com.example.prueba10.util.Constant;
 import com.example.prueba10.util.Utilidades;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -28,17 +36,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btn_login;
     private Button btn_registro;
     private Activity miActividad;
-
+    private FirebaseAuth mAuth;
     private EditText edt_usuario;
     private EditText edt_contrasena;
-
+    private Button btn_olvidaste;
     private final int ACTIVITY_REGISTRO = 1;
-
+    private final int ForgotPassword = 2;
     SharedPreferences mispreferencias;
-
+    private FirebaseFirestore db;
     private UserDatabase database;
 
     private List<User> listaUsuarios;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +56,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         miActividad = this;
 
+
+        db = FirebaseFirestore.getInstance();
+
         btn_login = findViewById(R.id.btn_login);
         btn_registro = findViewById(R.id.btn_registro);
-
+        mAuth = FirebaseAuth.getInstance();
         edt_usuario = findViewById(R.id.edt_usuario);
         edt_contrasena = findViewById(R.id.edt_contrasena);
-
+        btn_olvidaste = findViewById(R.id.btn_olvidaste);
         mispreferencias = getSharedPreferences(Constant.PREFERENCE, MODE_PRIVATE);
 
         String usuario = mispreferencias.getString("USUARIO", "");
@@ -61,18 +73,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             toMenu(usuario);
         }
 
-//        btn_login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                startActivity(intent);
-//
-//            }
-//        });
 
+        btn_olvidaste.setOnClickListener(this);
         btn_login.setOnClickListener(this);
         btn_registro.setOnClickListener(this);
-
         database = UserDatabase.getInstance(this);
 
         new GetUserTask(this).execute();
@@ -94,8 +98,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     toMenu(usuario);
                 } else {
 
-                    new GetUserLoginTask(this, usuario, Utilidades.md5(contrasena)).execute();
-
+                    //new GetUserLoginTask(this, usuario, Utilidades.md5(contrasena)).execute();
+                    loginFirebase(usuario,Utilidades.md5(contrasena));
                     //Toast.makeText(miActividad, "Error iniciando sesión", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -106,8 +110,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivityForResult(intentRegistro, ACTIVITY_REGISTRO);
 
                 break;
-
+            case R.id.btn_olvidaste:
+                Intent intentOlvidaste = new Intent(this,ForgotPassword.class);
+                startActivityForResult(intentOlvidaste, ForgotPassword);
+                break;
         }
+    }
+
+    public void loginFirebase(String usuario, String contrasena) {
+        DocumentReference docRef = db.collection("usuario").document(usuario);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String userContrasena = document.getData().get("contrasena").toString();
+                        Log.e("TAG", "DocumentSnapshot data: " + document.getData().get("contrasena"));
+
+                        if (contrasena.equals(userContrasena)) {
+                            toMenu(usuario);
+                        }
+
+                    } else {
+                        Toast.makeText(miActividad, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", "No such document");
+                    }
+                } else {
+                    Log.e("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 
     public void toMenu(String usuario){

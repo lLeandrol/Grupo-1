@@ -1,6 +1,9 @@
 package com.example.prueba10.ui.gallery;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +19,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.prueba10.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +50,11 @@ public class GalleryFragment extends Fragment {
     private RatingBar rab_estrella;
     private Spinner spn_categorias;
     private TextView tev_gallery;
-    private String[] categorias = new String[]{ "Electrodomesticos", "Celulares", "Gaming"};
+    private String[] categorias = new String[]{ "Futbol", "Baloncesto", "Tenis", "Golf", "Natación"};
 
-    private String productos = "[{\"nombre\":\"Televisor\",\"categoria\":\"Electrodomesticos\",\"precio\":1200000,\"enstock\":true,\"image\":\"https://images.philips.com/is/image/PhilipsConsumer/65PUT6703_57-IMS-es_CO?wid=420&hei=360&$jpglarge$\",\"sucursal\":[{\"nombre\":\"Sucursal A\",\"direccion\":\"Direccion A\",\"encargado\":{\"nombre\":\"Encargado A\",\"celular\":\"31425321\"}},{\"nombre\":\"Sucursal B\",\"direccion\":\"Direccion B\",\"encargado\":{\"nombre\":\"Encargado B\",\"celular\":\"31425321\"}}]},{\"nombre\":\"Lavadora\",\"categoria\":\"Electrodomesticos\",\"precio\":1800000,\"enstock\":true,\"image\":\"https://www.alkosto.com/medias/8806090800450-001-750Wx750H?context=bWFzdGVyfGltYWdlc3w2NTEwN3xpbWFnZS9qcGVnfGltYWdlcy9oZDQvaGU3LzEwMzcwNDc3NTg4NTEwLmpwZ3w5NTNmMWE5OTFhNmI4NmU0MzFjNTNiNWMyYWZlZTNjMjA2MjU0MzIxYTM3Zjg1NWY0YmJhMDY3ZDI5OGFkODYw\",\"sucursal\":[{\"nombre\":\"Sucursal C\",\"direccion\":\"Direccion C\",\"encargado\":{\"nombre\":\"Encargado C\",\"celular\":\"31425321\"}},{\"nombre\":\"Sucursal D\",\"direccion\":\"Direccion D\",\"encargado\":{\"nombre\":\"Encargado D\",\"celular\":\"31425321\"}}]},{\"nombre\":\"Microondas\",\"categoria\":\"Electrodomesticos\",\"precio\":500000,\"enstock\":true,\"image\":\"https://falabella.scene7.com/is/image/FalabellaCO/2422239_1?wid=1500&hei=1500&qlt=70\",\"sucursal\":[{\"nombre\":\"Sucursal A\",\"direccion\":\"Direccion A\",\"encargado\":{\"nombre\":\"Encargado A\",\"celular\":\"31425321\"}},{\"nombre\":\"Sucursal B\",\"direccion\":\"Direccion B\",\"encargado\":{\"nombre\":\"Encargado B\",\"celular\":\"31425321\"}}]}]";
+    private String productos = "[{\"nombre\":\"Balon\",\"categoria\":\"Futbol\",\"precio\":40000,\"enstock\":true,\"image\":\"https://www.crushpixel.com/big-static12/preview4/soccer-ball-with-digital-internet-1002985.jpg\",\"sucursal\":[{\"nombre\":\"Sucursal A\",\"direccion\":\"Direccion A\",\"encargado\":{\"nombre\":\"Encargado A\",\"celular\":\"31425321\"}},{\"nombre\":\"Sucursal B\",\"direccion\":\"Direccion B\",\"encargado\":{\"nombre\":\"Encargado B\",\"celular\":\"31425321\"}}]},{\"nombre\":\"Guayos\",\"categoria\":\"Futbol\",\"precio\":50000,\"enstock\":true,\"image\":\"https://i.pinimg.com/550x/7b/10/be/7b10befbf264a22fe27a6f9bbf8aab73.jpg\",\"sucursal\":[{\"nombre\":\"Sucursal C\",\"direccion\":\"Direccion C\",\"encargado\":{\"nombre\":\"Encargado C\",\"celular\":\"31425321\"}},{\"nombre\":\"Sucursal D\",\"direccion\":\"Direccion D\",\"encargado\":{\"nombre\":\"Encargado D\",\"celular\":\"31425321\"}}]},{\"nombre\":\"Guantes\",\"categoria\":\"Futbol\",\"precio\":200000,\"enstock\":true,\"image\":\"https://contents.mediadecathlon.com/p1706042/k$ee991113590f376ce4eccf1f6a8c2b7a/guantes-para-portero-f500-ninos-azul-y-amarillo.jpg\",\"sucursal\":[{\"nombre\":\"Sucursal A\",\"direccion\":\"Direccion A\",\"encargado\":{\"nombre\":\"Encargado A\",\"celular\":\"31425321\"}},{\"nombre\":\"Sucursal B\",\"direccion\":\"Direccion B\",\"encargado\":{\"nombre\":\"Encargado B\",\"celular\":\"31425321\"}}]}]";
 
+    FirebaseFirestore db;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -92,8 +109,8 @@ public class GalleryFragment extends Fragment {
         try {
             JSONArray jsonProductos = new JSONArray(productos);
 
-            mAdapter = new ProductosAdapter(jsonProductos, getActivity());
-            rev_productos.setAdapter(mAdapter);
+            //mAdapter = new ProductosAdapter(jsonProductos, getActivity());
+            //rev_productos.setAdapter(mAdapter);
 
             JSONObject producto0 = jsonProductos.getJSONObject(0);
 
@@ -112,6 +129,40 @@ public class GalleryFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        db = FirebaseFirestore.getInstance();
+        db.collection("productos")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            JSONArray productos = new JSONArray();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.e("TAG", document.getId() + " => " + document.getData());
+
+                                JSONObject producto = new JSONObject();
+                                try {
+                                    producto.put("nombre", document.getData().get("nombre"));
+                                    producto.put("categoria", document.getData().get("categoria"));
+                                    producto.put("precio", document.getData().get("precio"));
+                                    producto.put("enstock", document.getData().get("enstock"));
+                                    producto.put("image", document.getData().get("image"));
+
+                                    productos.put(producto);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            mAdapter = new ProductosAdapter(productos, getActivity());
+                            rev_productos.setAdapter(mAdapter);
+                        } else {
+                            Log.e("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
 
         return root;
