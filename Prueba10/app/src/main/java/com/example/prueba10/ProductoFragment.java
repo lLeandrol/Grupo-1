@@ -1,5 +1,6 @@
 package com.example.prueba10;
 
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.prueba10.util.Constant;
@@ -34,6 +36,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import org.w3c.dom.Document;
 
 import java.io.IOException;
 import java.sql.Time;
@@ -70,10 +74,13 @@ public class ProductoFragment extends Fragment {
     private EditText edt_producto_precio;
     private CheckBox chb_producto_stock;
     private Button btn_producto_guardar;
+    private Button btn_producto_ubicacion;
+    private TextView tev_producto_ubicacion;
 
     private Uri data1;
 
     private final int REQUEST_FILE_CHOOSER = 1;
+    private final int REQUEST_MAPA = 2;
 
     private SharedPreferences mispreferencias;
 
@@ -82,6 +89,11 @@ public class ProductoFragment extends Fragment {
     FirebaseFirestore db;
 
     String urlImage;
+
+    private Activity miactividad;
+
+    private Double latitud;
+    private Double longitud;
 
     public ProductoFragment() {
         // Required empty public constructor
@@ -120,6 +132,7 @@ public class ProductoFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_producto, container, false);
 
+        miactividad = getActivity();
         btn_sel_imagen = root.findViewById(R.id.btn_sel_imagen);
         btn_subir_imagen = root.findViewById(R.id.btn_subir_imagen);
         imv_imagen = root.findViewById(R.id.imv_imagen);
@@ -129,6 +142,8 @@ public class ProductoFragment extends Fragment {
         edt_producto_precio = root.findViewById(R.id.edt_producto_precio);
         chb_producto_stock = root.findViewById(R.id.chb_producto_stock);
         btn_producto_guardar = root.findViewById(R.id.btn_producto_guardar);
+        btn_producto_ubicacion = root.findViewById(R.id.btn_producto_ubicacion);
+        tev_producto_ubicacion = root.findViewById(R.id.tev_producto_ubicacion);
 
 
         mispreferencias = getActivity().getSharedPreferences(Constant.PREFERENCE, MODE_PRIVATE);
@@ -172,6 +187,8 @@ public class ProductoFragment extends Fragment {
                 producto.put("precio", precio);
                 producto.put("enstock", stock);
                 producto.put("image", urlImage);
+                producto.put("latitud", latitud);
+                producto.put("longitud", longitud);
 
 
                 db.collection("productos")
@@ -203,6 +220,15 @@ public class ProductoFragment extends Fragment {
             }
         });
 
+
+        btn_producto_ubicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapaActivity.class);
+                startActivityForResult(intent, REQUEST_MAPA);
+            }
+        });
+
         return root;
     }
 
@@ -220,6 +246,14 @@ public class ProductoFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+            }
+        } else if (requestCode == REQUEST_MAPA) {
+            if (resultCode == Activity.RESULT_OK) {
+                latitud = data.getDoubleExtra("latitud", 0);
+                longitud = data.getDoubleExtra("longitud", 0);
+
+                tev_producto_ubicacion.setText("Ubicacion: " + latitud + " - " + longitud);
 
             }
         }

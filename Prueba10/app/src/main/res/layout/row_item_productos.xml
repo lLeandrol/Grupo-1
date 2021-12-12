@@ -52,19 +52,28 @@
 
         </TextView>
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_item_favorito"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Favorito">
+            android:text="Favorito"
+            android:src="@drawable/ic_no_favorite">
 
-        </Button>
+        </ImageButton>
 
         <Button
             android:id="@+id/btn_item_carrito"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Carrito">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btn_item_vermas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver mas">
 
         </Button>
 

@@ -36,4 +36,5 @@
     <string name="content_terms">Through Law 1581 of 2012 and Decree 1377 of 2013, it is established that all users of any application in cyberspace have the opportunity to know, delete, update and rectify all types of personal data collected, stored or that have been subject to treatment in databases in public and private entities.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_mapa">Map</string>
 </resources>

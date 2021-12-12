@@ -1,9 +1,10 @@
 package com.example.prueba10.ui.gallery;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -19,25 +21,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+import com.example.prueba10.DetalleProductoActivity;
 import com.example.prueba10.R;
+import com.example.prueba10.util.Constant;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -143,11 +139,28 @@ public class GalleryFragment extends Fragment {
 
                                 JSONObject producto = new JSONObject();
                                 try {
+                                    producto.put("codigo", document.getId());
                                     producto.put("nombre", document.getData().get("nombre"));
                                     producto.put("categoria", document.getData().get("categoria"));
                                     producto.put("precio", document.getData().get("precio"));
                                     producto.put("enstock", document.getData().get("enstock"));
-                                    producto.put("image", document.getData().get("image"));
+
+                                    if (document.getData().get("image") != null) {
+                                        producto.put("image", document.getData().get("image"));
+                                    } else {
+                                        producto.put("image", "error");
+                                    }
+
+                                    if (document.getData().get("latitud") != null && document.getData().get("longitud") != null) {
+                                        producto.put("latitud", document.getData().get("latitud"));
+                                        producto.put("longitud", document.getData().get("longitud"));
+                                    } else {
+                                        producto.put("latitud", 0.0);
+                                        producto.put("longitud", 0.0);
+                                    }
+
+
+
 
                                     productos.put(producto);
                                 } catch (JSONException e) {
@@ -175,9 +188,20 @@ class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder>
 
     private Activity miActividad;
 
+    private SharedPreferences mispreferencias;
+
+    private JSONArray favoritos;
+
     public ProductosAdapter(JSONArray productos, Activity miActividad) {
         this.productos = productos;
         this.miActividad = miActividad;
+        this.mispreferencias = miActividad.getSharedPreferences(Constant.PREFERENCE, Context.MODE_PRIVATE);
+
+        try {
+            this.favoritos = new JSONArray(mispreferencias.getString("favoritos", "[]"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -188,11 +212,12 @@ class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
 
         try {
             Log.e("POS_rec", "POS: " + position);
+            String codigo = productos.getJSONObject(position).getString("codigo");
             String nombre = productos.getJSONObject(position).getString("nombre");
             String categoria = productos.getJSONObject(position).getString("categoria");
             String precio = productos.getJSONObject(position).getString("precio");
@@ -202,14 +227,107 @@ class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder>
             holder.tev_item_categoria.setText(categoria);
             holder.tev_item_precio.setText(precio);
 
+            if (esFavorito(codigo)) {
+                holder.btn_item_favorito.setImageDrawable(miActividad.getDrawable(R.drawable.ic_favorite));
+            } else {
+                holder.btn_item_favorito.setImageDrawable(miActividad.getDrawable(R.drawable.ic_no_favorite));
+            }
+
             //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.imv_item_imagen);
 
             Glide.with(miActividad).load(imagen).into(holder.imv_item_imagen);
+
+            holder.btn_item_vermas.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Log.e("PRODUCTO", productos.getJSONObject(position).toString());
+
+                        Intent intent = new Intent(miActividad, DetalleProductoActivity.class);
+                        intent.putExtra("producto", productos.getJSONObject(position).toString());
+                        miActividad.startActivity(intent);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            holder.btn_item_favorito.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    try {
+
+                        if (esFavorito(codigo)) {
+                            holder.btn_item_favorito.setImageDrawable(miActividad.getDrawable(R.drawable.ic_no_favorite));
+                            eliminarFavorito(codigo);
+
+
+                        } else {
+                            holder.btn_item_favorito.setImageDrawable(miActividad.getDrawable(R.drawable.ic_favorite));
+                            JSONArray favoritos = new JSONArray(mispreferencias.getString("favoritos", "[]"));
+
+                            favoritos.put(productos.getJSONObject(position));
+
+                            SharedPreferences.Editor editor = mispreferencias.edit();
+                            editor.putString("favoritos", favoritos.toString());
+                            editor.commit();
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            });
 
 
         } catch (JSONException e) {
             holder.tev_item_nombre.setText("error");
         }
+
+    }
+
+    public boolean esFavorito(String codigo) {
+
+        for (int i = 0; i < favoritos.length(); i++) {
+            try {
+                if (favoritos.getJSONObject(i).getString("codigo").equals(codigo)) {
+
+
+                    return true;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false;
+
+    }
+
+    public void eliminarFavorito(String codigo) {
+
+        for (int i = 0; i < favoritos.length(); i++) {
+            try {
+                if (favoritos.getJSONObject(i).getString("codigo").equals(codigo)) {
+
+                    favoritos.remove(i);
+                    SharedPreferences.Editor editor = mispreferencias.edit();
+                    editor.putString("favoritos", favoritos.toString());
+                    editor.commit();
+                    return;
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
 
     }
 
@@ -223,9 +341,10 @@ class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder>
         private TextView tev_item_nombre;
         private TextView tev_item_categoria;
         private TextView tev_item_precio;
-        private Button btn_item_favorito;
+        private ImageButton btn_item_favorito;
         private Button btn_item_carrito;
         private ImageView imv_item_imagen;
+        private Button btn_item_vermas;
         public ViewHolder(View v) {
             super(v);
             tev_item_nombre = v.findViewById(R.id.tev_item_nombre);
@@ -234,6 +353,7 @@ class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder>
             btn_item_favorito = v.findViewById(R.id.btn_item_favorito);
             btn_item_carrito = v.findViewById(R.id.btn_item_carrito);
             imv_item_imagen = v.findViewById(R.id.imv_item_imagen);
+            btn_item_vermas = v.findViewById(R.id.btn_item_vermas);
 
         }
     }

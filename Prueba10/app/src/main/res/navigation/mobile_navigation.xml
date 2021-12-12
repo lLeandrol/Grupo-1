@@ -28,4 +28,14 @@
         android:name="com.example.prueba10.ProductoFragment"
         android:label="Product"
         tools:layout="@layout/fragment_producto" />
+    <fragment
+        android:id="@+id/nav_fav"
+        android:name="com.example.prueba10.ui.favorite.Fav"
+        android:label="Favorite"
+        tools:layout="@layout/fav_fragment" />
+    <fragment
+        android:id="@+id/nav_shop"
+        android:name="com.example.prueba10.ui.Shopping.Shopping"
+        android:label="Shopping Cart"
+        tools:layout="@layout/shopping_fragment" />
 </navigation>
